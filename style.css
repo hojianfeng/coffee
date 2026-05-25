@@ -668,7 +668,21 @@ em { font-style: italic; color: var(--gold); }
   transition: transform var(--transition), box-shadow var(--transition);
 }
 .highlight-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.hi-icon { font-size: 2rem; margin-bottom: 1rem; }
+.hi-icon {
+  width: 48px; height: 48px;
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--gold);
+  transition: background var(--transition), transform var(--transition);
+}
+.hi-icon svg { width: 22px; height: 22px; }
+.highlight-item:hover .hi-icon {
+  background: rgba(201, 168, 76, 0.22);
+  transform: scale(1.08);
+}
 .highlight-item h4 { font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 0.5rem; }
 .highlight-item p { color: var(--text-light); font-size: 0.875rem; line-height: 1.7; }
 
