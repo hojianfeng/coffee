@@ -334,29 +334,30 @@ form.addEventListener('submit', async (e) => {
   const data = Object.fromEntries(formData.entries());
 
   try {
-    const payload = new FormData();
-    payload.append('name',     data.name);
-    payload.append('email',    data.email);
-    payload.append('phone',    data.phone    || 'Not provided');
-    payload.append('company',  data.company  || 'Not provided');
-    payload.append('workshop', data.workshop);
-    payload.append('message',  data.message);
-    payload.append('_subject', 'New Workshop Enquiry — Brewed Artistry');
-    payload.append('_captcha', 'false');
-    payload.append('_template', 'table');
-
-    const res = await fetch('https://formsubmit.co/hojianfeng1@gmail.com', {
+    const res = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: payload,
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: 'YOUR_WEB3FORMS_KEY',  // replace after getting key from web3forms.com
+        subject:    'New Workshop Enquiry — Brewed Artistry',
+        from_name:  'Brewed Artistry Website',
+        name:       data.name,
+        email:      data.email,
+        phone:      data.phone    || 'Not provided',
+        company:    data.company  || 'Not provided',
+        workshop:   data.workshop,
+        message:    data.message,
+      }),
     });
 
-    if (res.ok) {
+    const result = await res.json();
+
+    if (result.success) {
       formNotice.className = 'form-notice success';
       formNotice.textContent = '✓ Thank you! Your enquiry has been sent. We\'ll be in touch within 1 business day.';
       form.reset();
     } else {
-      throw new Error('Server error ' + res.status);
+      throw new Error(result.message || 'Submission failed');
     }
   } catch (err) {
     formNotice.className = 'form-notice error';
