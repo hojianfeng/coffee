@@ -181,7 +181,7 @@ All colours are CSS custom properties in `style.css` — edit them to rebrand in
 Update the phone number in `index.html`:
 
 ```html
-<a href="https://wa.me/YOUR_NUMBER" class="whatsapp-btn" …>
+<a href="https://wa.me/6592470680" class="whatsapp-btn" …>
 ```
 
 ## Optional Enhancements
