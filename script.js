@@ -338,7 +338,7 @@ form.addEventListener('submit', async (e) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        access_key: 'YOUR_WEB3FORMS_KEY',  // replace after getting key from web3forms.com
+        access_key: '27dc3bba-d80f-4785-8526-dd4087ae23a8',
         subject:    'New Workshop Enquiry — Brewed Artistry',
         from_name:  'Brewed Artistry Website',
         name:       data.name,
