@@ -334,20 +334,21 @@ form.addEventListener('submit', async (e) => {
   const data = Object.fromEntries(formData.entries());
 
   try {
-    const res = await fetch('https://formsubmit.co/ajax/hojianfeng1@gmail.com', {
+    const payload = new FormData();
+    payload.append('name',     data.name);
+    payload.append('email',    data.email);
+    payload.append('phone',    data.phone    || 'Not provided');
+    payload.append('company',  data.company  || 'Not provided');
+    payload.append('workshop', data.workshop);
+    payload.append('message',  data.message);
+    payload.append('_subject', 'New Workshop Enquiry — Brewed Artistry');
+    payload.append('_captcha', 'false');
+    payload.append('_template', 'table');
+
+    const res = await fetch('https://formsubmit.co/hojianfeng1@gmail.com', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
-        name:     data.name,
-        email:    data.email,
-        phone:    data.phone || 'Not provided',
-        company:  data.company || 'Not provided',
-        workshop: data.workshop,
-        message:  data.message,
-      }),
+      headers: { 'Accept': 'application/json' },
+      body: payload,
     });
 
     if (res.ok) {
@@ -355,11 +356,12 @@ form.addEventListener('submit', async (e) => {
       formNotice.textContent = '✓ Thank you! Your enquiry has been sent. We\'ll be in touch within 1 business day.';
       form.reset();
     } else {
-      throw new Error('Server error');
+      throw new Error('Server error ' + res.status);
     }
-  } catch {
+  } catch (err) {
     formNotice.className = 'form-notice error';
     formNotice.textContent = '✗ Something went wrong. Please email us directly at hojianfeng1@gmail.com';
+    console.error('Form error:', err);
   } finally {
     btnText.style.display = 'inline';
     btnSpinner.style.display = 'none';
