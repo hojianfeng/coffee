@@ -334,7 +334,7 @@ form.addEventListener('submit', async (e) => {
   const data = Object.fromEntries(formData.entries());
 
   try {
-    const res = await fetch('https://formsubmit.co/ajax/hello@brewedartistry.com', {
+    const res = await fetch('https://formsubmit.co/ajax/hojianfeng1@gmail.com', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -359,7 +359,7 @@ form.addEventListener('submit', async (e) => {
     }
   } catch {
     formNotice.className = 'form-notice error';
-    formNotice.textContent = '✗ Something went wrong. Please email us directly at hello@brewedartistry.com';
+    formNotice.textContent = '✗ Something went wrong. Please email us directly at hojianfeng1@gmail.com';
   } finally {
     btnText.style.display = 'inline';
     btnSpinner.style.display = 'none';
